@@ -1,0 +1,11 @@
+# Thu Nov  8 13:29:37 2012 /share/apps/corona/bin/filter_fasta.pl --output=/data/results/solid0717/61_106_20121101_FRAG_BC/61_106/results.F1B1/primary.20121108061956448 --name=61_106_20121101_FRAG_BC_61_106 --tag=F3 --minlength=50 --prefix=T --librarytype=fragment --stringency=20 /data/results/solid0717/61_106_20121101_FRAG_BC/61_106/jobs/postPrimerSetPrimary.6295/rawseq 
+# Cwd: /home/pipeline
+# Title: 61_106_20121101_FRAG_BC_61_106
+>2_34_302_F3
+T.120.....11....020...10....33.12.10111.1.30..02020
+>2_34_383_F3
+T.102.....13....321...31....30.03.00..0.0.30..01000
+>2_34_598_F3
+T.000.....21....013...10....01.13.00321.0.20..11000
+>2_34_680_F3
+T.201.....00....233...30....01.23.21.10.1.11..02000

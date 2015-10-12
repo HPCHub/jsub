@@ -1,0 +1,24 @@
+<project name="jsub-web">
+
+	<property name="host" value="jsub-test.ripcm.com" />
+
+	<target name="deploy" depends="check-dist-directory,is-dist-exists" description="deploy web application on production server">
+		<echo>start</echo>
+		<scp file="target/jsub.war" todir="jsub@${host}:/var/lib/tomcat6/jsub" keyfile="${user.home}/.ssh/id_rsa" verbose="true" passphrase="propoy5"  />
+		<echo>end</echo>
+	</target>
+
+	<target name="check-dist-directory">
+		<available file="target/jsub.war" property="jsub.dist.exists" />
+	</target>
+
+	<target name="is-dist-exists" unless="jsub.dist.exists">
+		<fail>target/jsub.war file does not exists</fail>
+	</target>
+
+	<target name="print-hosts" description="print list of available for deploy hosts">
+		<echo>cluster.ripcm.com</echo>
+		<echo>cluster.kaz.ripcm.com</echo>
+		<echo>jsub-test.ripcm.com </echo> 
+	</target>
+</project>

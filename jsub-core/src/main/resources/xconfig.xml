@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <properties>
+        <!-- set by maven profile properties -->
+        <property name="applicationMode" value="${application.mode}" />
+        <property name="defaultJobType" value="shell" />
+        <property name="defaultShellTemplate" value="template.sh" />
+        <property name="gePeName" value="${gePeName}" />
+        <property name="geWcQueue" value="${geWcQueue}" />
+    </properties>
+    <extension-property-map>
+        <extension name="csfasta">csfasta.file</extension>
+        <extension name="qual">qual.file</extension>
+        <extension name="fastq">fastq.file</extension>
+        <extension name="fq">fastq.file</extension>
+    </extension-property-map>
+    <engines>
+        <engine name="php">
+            <extension>php</extension>
+            <extension>phtml</extension>
+        </engine>
+        <engine name="python">
+            <extension>py</extension>
+        </engine>
+        <engine name="perl">
+            <extension>pl</extension>
+        </engine>
+    </engines>
+    <pipelines>
+        <metagenome>
+            <clear-list>
+                <target>bowtie2-human-mapping</target>
+                <target>bowtie2-reference-mapping</target>
+                <target>reads-filter.pl</target>
+                <target>saet</target>
+                <target>qv-trimming</target>
+                <target>human-mapping</target>
+                <target>reference-mapping</target>
+                <target>sam2bam</target>
+                <target>sort-bam</target>
+            </clear-list>
+        </metagenome>
+        <transcriptome>
+            <clear-list>
+            </clear-list>
+        </transcriptome>
+    </pipelines>
+</configuration>

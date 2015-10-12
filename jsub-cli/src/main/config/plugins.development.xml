@@ -1,0 +1,3 @@
+<plugins>
+    <bowtie enabled="true" class="ru.niifhm.bioinformatics.jsub.plugin.BowtieSplitter" />
+</plugins>

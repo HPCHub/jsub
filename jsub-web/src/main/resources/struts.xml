@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    <constant name="struts.devMode" value="true" />
+    <package name="default" extends="json-default" namespace="/">
+        <!-- If no class attribute is specified the framework will assume success and render the result index.jsp -->
+        <!-- If no name value for the result node is specified the success value is the default -->
+        <action name="index">
+            <result>/index.jsp</result>
+        </action>
+        <!-- action name="config" class="ru.niifhm.bioinformatics.jsub.web.ConfigAction">
+            <result>/config.jsp</result>
+        </action-->
+        <action name="execute" class="ru.niifhm.bioinformatics.jsub.web.ExecuteScenarioAction">
+            <result type="json" />
+        </action>
+        <action name="list" class="ru.niifhm.bioinformatics.jsub.web.ScenarioListAction">
+            <result type="json" />
+        </action>
+        <action name="configure" class="ru.niifhm.bioinformatics.jsub.web.ConfigureScenarioAction">
+            <result type="json">
+                <param name="excludeProperties">
+                    properties.*clearName.*,
+                    properties.*property.*,
+                    properties.*input.*,
+                    properties.*output.*
+                </param>
+            </result>
+        </action>
+        <action name="tags" class="ru.niifhm.bioinformatics.jsub.web.ListTagsAction">
+            <result type="json" />
+        </action>
+        <action name="runs" class="ru.niifhm.bioinformatics.jsub.web.ListRunsAction">
+            <result type="json" />
+        </action>
+        <action name="dependens" class="ru.niifhm.bioinformatics.jsub.web.ListDependensAction">
+            <result type="json" />
+        </action>
+        <action name="system" class="ru.niifhm.bioinformatics.jsub.web.SystemFitnessAction">
+            <interceptor-ref name="prepare"/>
+            <result type="json" />
+        </action>
+    </package>
+    <package name="process" extends="json-default" namespace="/process">
+        <action name="list" class="ru.niifhm.bioinformatics.jsub.web.ListProcessesAction">
+            <result type="json" />
+        </action>
+    </package>
+    <package name="config" extends="json-default" namespace="/config">
+        <action name="update" class="ru.niifhm.bioinformatics.jsub.web.UpdateConfigAction">
+            <result type="json" />
+        </action>
+    </package>
+    <package name="file" extends="json-default" namespace="/file">
+        <action name="list" class="ru.niifhm.bioinformatics.jsub.web.ListFilesAction">
+            <result type="json">
+                <param name="excludeProperties">.*parentFile</param>
+            </result>
+        </action>
+        <action name="system" class="ru.niifhm.bioinformatics.jsub.web.ListFileSystemAction">
+            <result type="json">
+                <param name="excludeProperties">.*parentFile</param>
+            </result>
+        </action>
+        <action name="download" class="ru.niifhm.bioinformatics.jsub.web.DownloadFileAction">
+            <result type="stream">
+                <param name="contentType">application/octet-stream</param>
+                <param name="inputName">fileInputStream</param>
+                <param name="contentDisposition">attachment;filename=%{filename}</param>
+                <param name="bufferSize">4096</param>
+            </result>
+        </action>
+    </package>
+    <package name="genome" extends="json-default" namespace="/genome">
+        <action name="list" class="ru.niifhm.bioinformatics.jsub.web.ListGenomesAction">
+            <result type="json">
+                <param name="excludeProperties">.*parentFile</param>
+            </result>
+        </action>
+    </package>
+    <package name="fasta" extends="json-default" namespace="/fasta">
+        <action name="indexes" class="ru.niifhm.bioinformatics.jsub.web.ListFastaIndexAction">
+            <result type="json">
+                <param name="excludeProperties">.*parentFile</param>
+            </result>
+        </action>
+    </package>
+    <package name="bowtie" extends="json-default" namespace="/bowtie">
+        <action name="indexes" class="ru.niifhm.bioinformatics.jsub.web.ListBowtieIndexesAction">
+            <result type="json" />
+        </action>
+    </package>
+    <package name="reference" extends="json-default" namespace="/reference">
+        <action name="list" class="ru.niifhm.bioinformatics.jsub.web.ListReferencesAction">
+            <result type="json" />
+        </action>
+    </package>
+    <package name="readSets" extends="json-default" namespace="/readSet">
+        <action name="list" class="ru.niifhm.bioinformatics.jsub.web.ListReadSetsAction">
+            <result type="json" />
+        </action>
+    </package>
+    <package name="project" extends="json-default" namespace="/project">
+        <action name="list" class="ru.niifhm.bioinformatics.jsub.web.ListProjectsAction">
+            <result type="json" />
+        </action>
+    </package>
+</struts>

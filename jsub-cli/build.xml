@@ -1,0 +1,37 @@
+<project name="jsub-cli">
+
+	<property name="dist-name" value="jsub-cli-dist" />
+
+	<target name="deploy-scripts" description="deploy auxiliary scripts">
+		<scp todir="biouser@cluster.ripcm.com:/data3/bio/biouser/snippets" password="jwcEn9uv" verbose="true">
+			<fileset dir="src/main/scripts">
+				<exclude name="jsub.*"/>
+			</fileset>
+		</scp>
+	</target>
+
+	<target name="staging-deploy" depends="check-dist-directory,is-dist-exists" description="deploy distributive to user home directory">
+		<scp todir="${user.name}@cluster.ripcm.com:/home/${user.name}/projects/jsub-staging" keyfile="${user.home}/.ssh/id_rsa" verbose="true">
+			<fileset dir="target/${dist-name}" />
+		</scp>
+	</target>
+
+	<target name="production-deploy" depends="check-dist-directory,is-dist-exists" description="deploy distributive to application directory">
+		<scp todir="${user.name}@cluster.ripcm.com:/data3/bio/biouser/tools/jsub" keyfile="${user.home}/.ssh/id_rsa" verbose="true">
+			<fileset dir="target/${dist-name}" />
+		</scp>
+	</target>
+
+	<target name="deploy">
+		<antcall target="production-deploy" />
+	</target>
+
+	<target name="check-dist-directory">
+		<available file="target/${dist-name}" property="jsub.dist.exists" />
+	</target>
+
+	<target name="is-dist-exists" unless="jsub.dist.exists">
+		<fail>jsub-dist directory does not exists</fail>
+	</target>
+
+</project>

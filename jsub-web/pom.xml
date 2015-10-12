@@ -1,0 +1,126 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <!-- All about maven predefined properties: 
+        http://docs.codehaus.org/display/MAVENUSER/MavenPropertiesGuide 
+        http://www.sonatype.com/books/mvnref-book/reference/resource-filtering-sect-properties.html
+    -->
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.ripcm.bioinformatics</groupId>
+    <artifactId>jsub-web</artifactId>
+    <version>1.0</version>
+    <packaging>war</packaging>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+    
+    <!-- 
+   <profiles>
+    <profile>
+    <id>jsub-test</id>
+    <activation>
+        <activeByDefault>true</activeByDefault>
+    </activation>
+    <properties>
+        <server>jsub-test.ripcm.com</server>
+    </properties>
+    </profile>
+    </profiles>
+    
+    -->
+    
+    <build>
+        <finalName>jsub</finalName>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+        </resources>
+        <plugins>
+            <!-- use properly version of JDK -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.5.1</version>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencies>
+        <!-- dependency>
+            <groupId>com.sun</groupId>
+            <artifactId>tools</artifactId>
+            <version>1.5.0</version>
+            <scope>system</scope>
+            <systemPath>/usr/lib/jvm/java-6-sun-1.6.0.21/lib/tools.jar</systemPath>
+        </dependency -->
+        <!-- dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>activemq-core</artifactId>
+            <version>5.7.0</version>
+            <exclusions -->
+                <!-- exclude recent version of slf library -->
+                <!-- exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-api</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency -->
+        <dependency>
+            <groupId>com.ripcm.bioinformatics</groupId>
+            <artifactId>biodb</artifactId>
+            <version>0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>ru.spb.zeleniy</groupId>
+            <artifactId>mproperties</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>2.5</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.ripcm.bioinformatics</groupId>
+            <artifactId>util</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.ripcm.bioinformatics</groupId>
+            <artifactId>jsub-core</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <!-- dependency>
+            <groupId>com.ripcm.bioinformatics</groupId>
+            <artifactId>conveyor-core</artifactId>
+            <version>1.0</version>
+        </dependency -->
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.17</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.struts</groupId>
+            <artifactId>struts2-core</artifactId>
+            <version>2.3.4.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.struts</groupId>
+            <artifactId>struts2-json-plugin</artifactId>
+            <version>2.3.4.1</version>
+        </dependency>
+        <dependency>
+            <groupId>jstl</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
+        </dependency>
+    </dependencies>
+</project>

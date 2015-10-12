@@ -1,0 +1,369 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <!-- All about maven predefined properties: 
+        http://docs.codehaus.org/display/MAVENUSER/MavenPropertiesGuide 
+        http://www.sonatype.com/books/mvnref-book/reference/resource-filtering-sect-properties.html
+    -->
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.ripcm.bioinformatics</groupId>
+    <artifactId>jsub-core</artifactId>
+    <version>1.0</version>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <profiles>
+        <profile>
+            <id>development</id>
+            <properties>
+                <application.mode>development</application.mode>
+                <log.level>debug</log.level>
+            </properties>
+        </profile>
+        <profile>
+            <id>testing</id>
+            <properties>
+                <application.mode>development</application.mode>
+                <log.level>debug</log.level>
+            </properties>
+        </profile>
+        <profile>
+            <id>staging</id>
+            <properties>
+                <application.mode>production</application.mode>
+                <log.level>info</log.level>
+            </properties>
+        </profile>
+        <profile>
+            <id>production</id>
+            <properties>
+                <application.mode>production</application.mode>
+                <log.level>info</log.level>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>local</id>
+            <properties>
+                <!-- xconfig.xml -->
+                <gePeName>noLocalQueue</gePeName>
+                <geWcQueue></geWcQueue>
+                <!-- jsub.${mode}.properties -->
+                <conveyor.dir>/home/${user.name}/workspace/conveyor-scripts/build/skeleton</conveyor.dir>
+                <ant.script.dir>/home/${user.name}/workspace/conveyor-scripts/build/scripts/ant</ant.script.dir>
+                <shell.script.dir>/home/${user.name}/workspace/conveyor-scripts/build/scripts/shell</shell.script.dir>
+                <python.script.dir>/home/${user.name}/workspace/conveyor-scripts/build/scripts/python</python.script.dir>
+                <web.project.dir>/home/${user.name}/workspace/jsub</web.project.dir>
+                <grid.reporting.file>/home/${user.name}/Desktop/reporting</grid.reporting.file>
+                <!-- tools.${mode}.xml -->
+                <jsub>/data3/bio/biouser/tools/jsub/scripts/jsub.production.sh</jsub>
+                <bowtie>/home/${user.name}/bin/bowtie</bowtie>
+                <bowtie2>/home/${user.name}/bin/bowtie2</bowtie2>
+                <csfasta-quality-filter>/home/${user.name}/bin/csfasta_quality_filter.pl</csfasta-quality-filter>
+                <saet>saet</saet>
+                <samtools>/data3/bio/biouser/bin/samtools</samtools>
+                <bedtools>/data3/bio/biouser/tools/BEDTools-Version-2.12.0/bin</bedtools>
+                <coverage-histogram>/data3/bio/biouser/tools/bedtools_cov/get_cov_from_bedtools_hist.py</coverage-histogram>
+                <python>python</python>
+                <php>/usr/bin/php</php>
+                <sqlldr>/u01/app/oracle/11.2/client64/bin/sqlldr</sqlldr>
+                <lscope-snp-filter>/data3/bio/biouser/snippets/filter_lifescope_SNPs.sh</lscope-snp-filter>
+                <lscope-2-promethease-converter>/data3/bio/biouser/snippets/convert_lifescope_SNPs_for_promethease.sh</lscope-2-promethease-converter>
+                <perl>perl</perl>
+                <gff3-to-annovar>/data3/bio/biouser/tools/annovar/convert2annovar.pl</gff3-to-annovar>
+                <annovar-annotate-variation>/data3/bio/biouser/tools/annovar/annotate_variation.pl</annovar-annotate-variation>
+                <gwas-analyser>/data3/bio/biouser/snippets/illnesses/illness.php</gwas-analyser>
+                <ancestry-analyser>/data3/bio/biouser/snippets/ancestry/ancestry.php</ancestry-analyser>
+                <solid-preprocess-filter-v2>/usr/local/share/tools/SOLiD_preprocess_filter_v2.pl</solid-preprocess-filter-v2>
+                <rapsearch>/data3/bio/biouser/tools/RAPSearch2.05_64bits/bin/rapsearch</rapsearch>
+                <varscan>varscan</varscan>
+            </properties>
+        </profile>
+        <profile>
+            <id>ripcm</id>
+            <properties>
+                <!-- xconfig.xml -->
+                <gePeName>make</gePeName>
+                <geWcQueue>all.q</geWcQueue>
+                <!-- jsub.${mode}.properties -->
+                <conveyor.dir>/data3/bio/biouser/tools/conveyor/skeleton</conveyor.dir>
+                <ant.script.dir>/data3/bio/biouser/tools/conveyor/scripts/ant</ant.script.dir>
+                <shell.script.dir>/data3/bio/biouser/tools/conveyor/scripts/shell</shell.script.dir>
+                <python.script.dir>/data3/bio/biouser/tools/conveyor/scripts/python</python.script.dir>
+                <web.project.dir>/data6/bio/jsub</web.project.dir>
+                <grid.reporting.file>/usr/share/gridengine/default/common/reporting</grid.reporting.file>
+                <!-- tools.${mode}.xml -->
+                <jsub>/data3/bio/biouser/tools/jsub/scripts/jsub.production.sh</jsub>
+                <bowtie>/srv/common/bin/bowtie</bowtie>
+                <bowtie2>/srv/common/bin/bowtie2</bowtie2>
+                <csfasta-quality-filter>/data3/bio/metagenome/reads/solid/csfasta_quality_filter.pl</csfasta-quality-filter>
+                <saet>/data3/bio/biouser/tools/SAET/bin/saet</saet>
+                <samtools>/data3/bio/biouser/bin/samtools</samtools>
+                <bedtools>/data3/bio/biouser/tools/BEDTools-Version-2.12.0/bin</bedtools>
+                <coverage-histogram>/data3/bio/biouser/tools/bedtools_cov/get_cov_from_bedtools_hist.py</coverage-histogram>
+                <python>/srv/common/bin/python</python>
+                <php>/usr/bin/php</php>
+                <sqlldr>/u01/app/oracle/11.2/client64/bin/sqlldr</sqlldr>
+                <lscope-snp-filter>/data3/bio/biouser/snippets/filter_lifescope_SNPs.sh</lscope-snp-filter>
+                <lscope-2-promethease-converter>/data3/bio/biouser/snippets/convert_lifescope_SNPs_for_promethease.sh</lscope-2-promethease-converter>
+                <perl>/srv/common/bin/perl</perl>
+                <gff3-to-annovar>/data3/bio/biouser/tools/annovar/convert2annovar.pl</gff3-to-annovar>
+                <annovar-annotate-variation>/data3/bio/biouser/tools/annovar/annotate_variation.pl</annovar-annotate-variation>
+                <gwas-analyser>/data3/bio/biouser/snippets/illnesses/illness.php</gwas-analyser>
+                <ancestry-analyser>/data3/bio/biouser/snippets/ancestry/ancestry.php</ancestry-analyser>
+                <solid-preprocess-filter-v2>/data3/bio/biouser/tools/sopra/SOLiD_preprocess_filter_v2.pl</solid-preprocess-filter-v2>
+                <rapsearch>/data3/bio/biouser/tools/RAPSearch2.05_64bits/bin/rapsearch</rapsearch>
+                <varscan>/srv/common/bin/varscan</varscan>
+            </properties>
+        </profile>
+        
+        <profile>
+            <id>jsub-test</id>
+            <properties>
+                <!-- xconfig.xml -->
+                <gePeName>make</gePeName>
+                <geWcQueue>qsub.test@node7.net0.pyxis.ripcm.com</geWcQueue>
+                <!-- jsub.${mode}.properties -->
+                <conveyor.dir>/data3/bio/biouser/tools/conveyor/skeleton</conveyor.dir>
+                <ant.script.dir>/data3/bio/biouser/tools/conveyor/scripts/ant</ant.script.dir>
+                <shell.script.dir>/data3/bio/biouser/tools/conveyor/scripts/shell</shell.script.dir>
+                <python.script.dir>/data3/bio/biouser/tools/conveyor/scripts/python</python.script.dir>
+                <web.project.dir>/data6/bio/jsub</web.project.dir>
+                <grid.reporting.file>/usr/share/gridengine/default/common/reporting</grid.reporting.file>
+                <!-- tools.${mode}.xml -->
+                <jsub>/data3/bio/biouser/tools/jsub/scripts/jsub.production.sh</jsub>
+                <bowtie>/srv/common/bin/bowtie</bowtie>
+                <bowtie2>/srv/common/bin/bowtie2</bowtie2>
+                <csfasta-quality-filter>/data3/bio/metagenome/reads/solid/csfasta_quality_filter.pl</csfasta-quality-filter>
+                <saet>/data3/bio/biouser/tools/SAET/bin/saet</saet>
+                <samtools>/data3/bio/biouser/bin/samtools</samtools>
+                <bedtools>/data3/bio/biouser/tools/BEDTools-Version-2.12.0/bin</bedtools>
+                <coverage-histogram>/data3/bio/biouser/tools/bedtools_cov/get_cov_from_bedtools_hist.py</coverage-histogram>
+                <python>/srv/common/bin/python</python>
+                <php>/usr/bin/php</php>
+                <sqlldr>/u01/app/oracle/11.2/client64/bin/sqlldr</sqlldr>
+                <lscope-snp-filter>/data3/bio/biouser/snippets/filter_lifescope_SNPs.sh</lscope-snp-filter>
+                <lscope-2-promethease-converter>/data3/bio/biouser/snippets/convert_lifescope_SNPs_for_promethease.sh</lscope-2-promethease-converter>
+                <perl>/srv/common/bin/perl</perl>
+                <gff3-to-annovar>/data3/bio/biouser/tools/annovar/convert2annovar.pl</gff3-to-annovar>
+                <annovar-annotate-variation>/data3/bio/biouser/tools/annovar/annotate_variation.pl</annovar-annotate-variation>
+                <gwas-analyser>/data3/bio/biouser/snippets/illnesses/illness.php</gwas-analyser>
+                <ancestry-analyser>/data3/bio/biouser/snippets/ancestry/ancestry.php</ancestry-analyser>
+                <solid-preprocess-filter-v2>/data3/bio/biouser/tools/sopra/SOLiD_preprocess_filter_v2.pl</solid-preprocess-filter-v2>
+                <rapsearch>/data3/bio/biouser/tools/RAPSearch2.05_64bits/bin/rapsearch</rapsearch>
+                <varscan>/srv/common/bin/varscan</varscan>
+            </properties>
+        </profile>
+        
+        
+        <profile>
+            <id>kaz</id>
+            <properties>
+                <!-- xconfig.xml -->
+                <gePeName>single_node</gePeName>
+                <geWcQueue></geWcQueue>
+                <!-- jsub.${mode}.properties -->
+                <conveyor.dir>/data/apps/share/conveyor/skeleton</conveyor.dir>
+                <ant.script.dir>/data/apps/share/conveyor/scripts/ant</ant.script.dir>
+                <shell.script.dir>/data/apps/share/conveyor/scripts/shell</shell.script.dir>
+                <python.script.dir>/data/apps/share/conveyor/scripts/python</python.script.dir>
+                <web.project.dir>/data/bio/jsub</web.project.dir>
+                <grid.reporting.file></grid.reporting.file>
+                <!-- tools.${mode}.xml -->
+                <jsub></jsub>
+                <bowtie>/usr/bin/bowtie</bowtie>
+                <bowtie2>/data/apps/src/bowtie2-2.2.1/bowtie2</bowtie2>
+                <csfasta-quality-filter>/data/apps/share/conveyor/scripts/perl/csfasta_quality_filter.pl</csfasta-quality-filter>
+                <saet>/data/apps/soft/SAET/bin/saet</saet>
+                <samtools>/usr/bin/samtools</samtools>
+                <bedtools>/data/apps/src/bedtools-2.17.0/bin</bedtools>
+                <coverage-histogram>/data/apps/share/scripts/get_cov_from_bedtools_hist.py</coverage-histogram>
+                <python>/usr/bin/python</python>
+                <php>/usr/bin/php</php>
+                <sqlldr>/data/apps/opt/oracle/client/bin/sqlldr</sqlldr>
+                <lscope-snp-filter>/data/apps/share/scripts/filter_lifescope_SNPs.sh</lscope-snp-filter>
+                <lscope-2-promethease-converter>/data/apps/share/scripts/convert_lifescope_SNPs_for_promethease.sh</lscope-2-promethease-converter>
+                <perl>/usr/bin/perl</perl>
+                <gff3-to-annovar>/data/apps/share/scripts/convert2annovar.pl</gff3-to-annovar>
+                <annovar-annotate-variation>/data/apps/share/scripts/annotate_variation.pl</annovar-annotate-variation>
+                <gwas-analyser>/data/apps/share/scripts/illness.php</gwas-analyser>
+                <ancestry-analyser>/data/apps/share/scripts/ancestry.php</ancestry-analyser>
+                <solid-preprocess-filter-v2></solid-preprocess-filter-v2>
+                <rapsearch></rapsearch>
+                <varscan></varscan>
+            </properties>
+        </profile>
+    </profiles>
+
+    <!-- Make application local repository for drmaa.jar, because for system scope there is no ability to add it to lib direcotory
+        while assembling application. See http://stackoverflow.com/questions/2065928/maven-2-assembly-with-dependencies-jar-under-scope-system-not-included/2068101#2068101
+        and http://stackoverflow.com/questions/2229757/maven-add-a-dependency-to-a-jar-by-relative-path/2230464#2230464 for 
+        more
+        details. -->
+    <repositories>
+        <repository>
+            <id>jsub-local-repository</id>
+            <url>file://${project.basedir}/src/repository</url>
+        </repository>
+    </repositories>
+
+    <distributionManagement>
+        <repository>
+            <id>clusterRepository</id>
+            <name>Scientific Research Institute of Physical-Chemical Medicine</name>
+            <url>scp://cluster.ripcm.com/opt/apache-maven-3.0.4/repository</url>
+        </repository>
+    </distributionManagement>
+
+    <build>
+        <finalName>${project.artifactId}</finalName>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+            <resource>
+                <directory>src/main/config</directory>
+                <filtering>true</filtering>
+                <!-- includes>
+                    <include>log4j.xml</include>
+                </includes -->
+            </resource>
+            <resource>
+                <directory>src/main/config</directory>
+                <targetPath>config</targetPath>
+                <includes>
+                    <include>jsub.*.properties</include>
+                    <include>tools.*.xml</include>
+                    <include>plugins.xml</include>
+                </includes>
+            </resource>
+        </resources>
+        <plugins>
+            <!-- use properly version of JDK -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.5.1</version>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                </configuration>
+            </plugin>
+            <!-- generate jar manifest file -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>ru.niifhm.bioinformatics.jsub.JsubCLI</mainClass>
+                            <packageName>ru.niifhm.bioinformatics.jsub</packageName>
+                            <addClasspath>true</addClasspath>
+                            <classpathPrefix>lib/</classpathPrefix>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+            <!-- assembling programm distributive -->
+            <!-- plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <descriptors>
+                        <descriptor>assembly.xml</descriptor>
+                    </descriptors>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.12.2</version>
+                <configuration>
+                    <includes>
+                        <include>**/CommandTestSuite.java</include>
+                    </includes>
+                </configuration>
+            </plugin>
+        </plugins>
+        <extensions>
+            <extension>
+                <groupId>org.apache.maven.wagon</groupId>
+                <artifactId>wagon-ssh</artifactId>
+                <version>2.2</version>
+            </extension>
+        </extensions>
+    </build>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.thoughtworks.xstream</groupId>
+            <artifactId>xstream</artifactId>
+            <version>1.2.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.ripcm.bioinformatics</groupId>
+            <artifactId>biodb</artifactId>
+            <version>0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.ripcm.bioinformatics</groupId>
+            <artifactId>util</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.ant</groupId>
+            <artifactId>ant</artifactId>
+            <version>1.8.4</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.ant</groupId>
+            <artifactId>ant-launcher</artifactId>
+            <version>1.8.4</version>
+        </dependency>
+        <dependency>
+            <groupId>ant-contrib</groupId>
+            <artifactId>ant-contrib</artifactId>
+            <version>1.0b3</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>ant</groupId>
+                    <artifactId>ant</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>ru.niifhm.bioinformatics</groupId>
+            <artifactId>drmaa-gridengine</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.17</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.10</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.4</version>
+        </dependency>
+    </dependencies>
+
+</project>

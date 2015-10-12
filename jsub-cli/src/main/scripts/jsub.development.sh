@@ -1,0 +1,42 @@
+java -Dfile.encoding=UTF-8\
+     -classpath /home/zeleniy/workspace/jsub-cli/target/classes:\
+/home/zeleniy/workspace/jsub-core/target/classes:\
+/home/zeleniy/.m2/repository/org/apache/activemq/activemq-core/5.7.0/activemq-core-5.7.0.jar:\
+/home/zeleniy/.m2/repository/org/apache/geronimo/specs/geronimo-jms_1.1_spec/1.1.1/geronimo-jms_1.1_spec-1.1.1.jar:\
+/home/zeleniy/.m2/repository/org/apache/geronimo/specs/geronimo-j2ee-management_1.1_spec/1.0.1/geronimo-j2ee-management_1.1_spec-1.0.1.jar:\
+/home/zeleniy/.m2/repository/xpp3/xpp3_min/1.1.3.4.O/xpp3_min-1.1.3.4.O.jar:\
+/home/zeleniy/.m2/repository/com/thoughtworks/xstream/xstream/1.2.2/xstream-1.2.2.jar:\
+/home/zeleniy/.m2/repository/org/apache/ant/ant/1.8.4/ant-1.8.4.jar:\
+/home/zeleniy/.m2/repository/org/apache/ant/ant-launcher/1.8.4/ant-launcher-1.8.4.jar:\
+/home/zeleniy/.m2/repository/ant-contrib/ant-contrib/1.0b3/ant-contrib-1.0b3.jar:\
+/home/zeleniy/.m2/repository/ru/niifhm/bioinformatics/drmaa-gridengine/1.0/drmaa-gridengine-1.0.jar:\
+/home/zeleniy/.m2/repository/log4j/log4j/1.2.17/log4j-1.2.17.jar:\
+/home/zeleniy/.m2/repository/commons-cli/commons-cli/1.2/commons-cli-1.2.jar:\
+/home/zeleniy/workspace/util/target/classes:\
+/home/zeleniy/.m2/repository/pl/pragmatists/JUnitParams/0.5.0/JUnitParams-0.5.0.jar:\
+/home/zeleniy/workspace/biodb/target/classes:\
+/home/zeleniy/workspace/conveyor-core/target/classes:\
+/home/zeleniy/.m2/repository/javax/transaction/jta/1.1/jta-1.1.jar:\
+/home/zeleniy/.m2/repository/javassist/javassist/3.12.1.GA/javassist-3.12.1.GA.jar:\
+/home/zeleniy/.m2/repository/com/oracle/ojdbc6/11.2.0.1.0/ojdbc6-11.2.0.1.0.jar:\
+/home/zeleniy/.m2/repository/dom4j/dom4j/1.6.1/dom4j-1.6.1.jar:\
+/home/zeleniy/.m2/repository/xml-apis/xml-apis/1.0.b2/xml-apis-1.0.b2.jar:\
+/home/zeleniy/.m2/repository/org/slf4j/slf4j-api/1.5.8/slf4j-api-1.5.8.jar:\
+/home/zeleniy/.m2/repository/org/slf4j/slf4j-log4j12/1.5.8/slf4j-log4j12-1.5.8.jar:\
+/home/zeleniy/.m2/repository/org/freemarker/freemarker/2.3.9/freemarker-2.3.9.jar:\
+/home/zeleniy/.m2/repository/cglib/cglib/2.2.2/cglib-2.2.2.jar:\
+/home/zeleniy/.m2/repository/asm/asm/3.3.1/asm-3.3.1.jar:\
+/home/zeleniy/.m2/repository/asm/asm-commons/3.3.1/asm-commons-3.3.1.jar:\
+/home/zeleniy/.m2/repository/asm/asm-tree/3.3.1/asm-tree-3.3.1.jar:\
+/home/zeleniy/.m2/repository/commons-collections/commons-collections/3.2.1/commons-collections-3.2.1.jar:\
+/home/zeleniy/.m2/repository/commons-logging/commons-logging/1.0.4/commons-logging-1.0.4.jar:\
+/home/zeleniy/.m2/repository/log4j/log4j/1.2.16/log4j-1.2.16.jar:\
+/home/zeleniy/.m2/repository/mysql/mysql-connector-java/5.1.8/mysql-connector-java-5.1.8.jar:\
+/home/zeleniy/.m2/repository/net/sf/jtidy/jtidy/r938/jtidy-r938.jar:\
+/home/zeleniy/.m2/repository/org/hibernate/hibernate-core/3.5.6-Final/hibernate-core-3.5.6-Final.jar:\
+/home/zeleniy/.m2/repository/antlr/antlr/2.7.6/antlr-2.7.6.jar:\
+/home/zeleniy/.m2/repository/org/hibernate/hibernate-tools/3.2.4.GA/hibernate-tools-3.2.4.GA.jar:\
+/home/zeleniy/.m2/repository/org/beanshell/bsh/2.0b4/bsh-2.0b4.jar:\
+/home/zeleniy/.m2/repository/freemarker/freemarker/2.3.8/freemarker-2.3.8.jar:\
+/home/zeleniy/.m2/repository/org/hibernate/jtidy/r8-20060801/jtidy-r8-20060801.jar:\
+/usr/lib/jvm/java-6-sun-1.6.0.21/lib/tools.jar com.ripcm.bioinformatics.jsub.cli.Main $@

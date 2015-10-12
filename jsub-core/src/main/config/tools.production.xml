@@ -1,0 +1,22 @@
+<tools>
+    <bowtie path="${bowtie}" thread="--threads" />
+    <bowtie2 path="${bowtie2}" thread="--threads" />
+    <csfasta-quality-filter path="${csfasta-quality-filter}" />
+    <saet path="${saet}" thread="-numcores" />
+    <samtools path="${samtools}" />
+    <bedtools path="${bedtools}" />
+    <coverage-histogram path="${coverage-histogram}" />
+    <python path="${python}" />
+    <php path="${php}" />
+    <sqlldr path="${sqlldr}" />
+    <lscope-snp-filter path="${lscope-snp-filter}" />
+    <lscope-2-promethease-converter path="${lscope-2-promethease-converter}" />
+    <perl path="${perl}" />
+    <gff3-to-annovar path="${gff3-to-annovar}" />
+    <annovar-annotate-variation path="${annovar-annotate-variation}" />
+    <gwas-analyser path="${gwas-analyser}" />
+    <ancestry-analyser path="${ancestry-analyser}" />
+    <solid-preprocess-filter-v2 path="${solid-preprocess-filter-v2}" />
+    <rapsearch path="${rapsearch}" thread="-z" />
+    <varscan path="${varscan}" />
+</tools>
