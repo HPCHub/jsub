@@ -44,6 +44,9 @@ var PropertyUtil = new function() {
 
 	this.getProxy = function(property) {
 
+		// AO:
+		return ProxyFactory.getProxy("/file/system", "files");
+
 		var matches;
 
 		if (property == "input.ref-genome.file") {

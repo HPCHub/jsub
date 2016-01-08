@@ -4,11 +4,10 @@
 package ru.niifhm.bioinformatics.jsub.web.data;
 
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.File;
+import java.util.*;
+
+import org.apache.log4j.Logger;
 import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
@@ -26,6 +25,7 @@ import ru.niifhm.bioinformatics.jsub.configuration.XConfig;
  */
 public class ReadSetDataProvider<E> extends DataProvider<E> {
 
+    private static Logger _logger = Logger.getLogger(ReadSetDataProvider.class);
 
     /**
      * 
@@ -36,6 +36,9 @@ public class ReadSetDataProvider<E> extends DataProvider<E> {
      */
     protected ReadSet     _current;
 
+    public List<ReadSet> getReadSets() {
+        return _readSets;
+    }
 
     /* (non-Javadoc)
      * @see ru.niifhm.bioinformatics.jsub.web.data.DataProvider#current()
@@ -182,12 +185,32 @@ public class ReadSetDataProvider<E> extends DataProvider<E> {
             Property fasta = props.getLikeName(new String[] {"fasta", "fastq", "fna", "fa"}, true);
             Property quality = props.getLikeName("qual", true);
 
-            if (fasta == null) {
-                _readSets = new ArrayList<ReadSet>();
-            } else if (fasta != null && quality != null) {
-                _readSets = Arrays.asList(new ReadSet(fasta.getValue(), quality.getValue()));
-            } else {
-                _readSets = Arrays.asList(new ReadSet(fasta.getValue()));
+            _readSets = new ArrayList<ReadSet>();
+            if (fasta != null) {
+                File fasta_dir = new File(fasta.getValue());
+                if (fasta_dir.isDirectory()) {
+                    String[] fasta_paths = fasta_dir.list();
+                    Arrays.sort(fasta_paths);
+                    if (quality == null) {
+                        for (String p : fasta_paths)
+                            _readSets.add(new ReadSet(fasta_dir + File.separator + p, null));
+                    } else {
+                        File quality_dir = new File(quality.getValue());
+                        if (!quality_dir.isDirectory()) {
+                            throw new Exception("If fasta is a directory than quality must be a directory either!");
+                        }
+                        String[] quality_paths = quality_dir.list();
+                        if (fasta_paths.length != quality_paths.length) {
+                            throw new Exception("fasta and quality directories should contain the same number of files!");
+                        }
+                        Arrays.sort(quality_paths);
+                        for (int i = 0; i < fasta_paths.length; i++) {
+                            _readSets.add(new ReadSet(fasta_dir + File.separator + fasta_paths[i], quality_dir + File.separator + quality_paths[i]));
+                        }
+                    }
+                } else {
+                    _readSets.add(new ReadSet(fasta.getValue(), quality == null ? null : quality.getValue()));
+                }
             }
         }
 
