@@ -44,8 +44,8 @@ var PropertyUtil = new function() {
 
 	this.getProxy = function(property) {
 
-		// AO:
-		return ProxyFactory.getProxy("/file/system", "files");
+		// Use this in absence of DB for choosing files from the file system:
+		//return ProxyFactory.getProxy("/file/system", "files");
 
 		var matches;
 
