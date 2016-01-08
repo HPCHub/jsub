@@ -104,6 +104,11 @@ public class QueueExecuter extends Executer {
                 jt.setErrorPath(StringPool.COLON + _pipeline.getLogDirectory().getPath());
                 jt.setNativeSpecification(JobSpecification.factory(job).create().toString());
                 jt.setRemoteCommand(job.getShellScriptPathname());
+                _logger.info(String.format(
+                        "Command: %s, WorkingDirectory: %s, JobSpecification: %s, OutputPath: %s, ErrorPath: %s",
+                        jt.getRemoteCommand(), jt.getWorkingDirectory(), jt.getNativeSpecification(),
+                        jt.getOutputPath(), jt.getErrorPath()
+                ));
 
                 String jobId = session.runJob(jt);
                 session.deleteJobTemplate(jt);
@@ -140,6 +145,8 @@ public class QueueExecuter extends Executer {
                     
                 }
             }
+
+            e.printStackTrace();
 
             Jsub.getInstance().resetLogFilepath();
             throw new BuildException(String.format(

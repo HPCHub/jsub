@@ -195,6 +195,50 @@
                 <varscan></varscan>
             </properties>
         </profile>
+
+        <profile>
+            <id>hpchub</id>
+            <properties>
+                <!-- xconfig.xml -->
+                <gePeName>smp</gePeName>
+                <geWcQueue>all.q</geWcQueue>
+                <!-- jsub.${mode}.properties -->
+                <conveyor.dir>/shared/opt/conveyor/skeleton</conveyor.dir>
+                <ant.script.dir>/shared/opt/conveyor/scripts/ant</ant.script.dir>
+                <shell.script.dir>/shared/opt/conveyor/scripts/shell</shell.script.dir>
+                <python.script.dir>/shared/opt/conveyor/scripts/python</python.script.dir>
+                <web.project.dir>/shared/jsub</web.project.dir>
+                <global.log.file>/home/admin.master/jsub.log</global.log.file>
+                <grid.reporting.file>/opt/sge/default/common/reporting</grid.reporting.file>
+                <!-- tools.${mode}.xml -->
+                <!-- FIXME: probably isn't needed
+                <jsub>/data3/bio/biouser/tools/jsub/scripts/jsub.production.sh</jsub> -->
+                <jsub></jsub>
+                <bowtie>/opt/bio-soft/bin/bowtie</bowtie>
+                <bowtie2>/opt/bio-soft/bin/bowtie2</bowtie2>
+                <csfasta-quality-filter>/opt/bio-scripts/csfasta_quality_filter.pl</csfasta-quality-filter>
+                <saet>/opt/bio-soft/bin/saet</saet>
+                <samtools>/opt/bio-soft/bin/samtools</samtools>
+                <bedtools>/opt/bio-soft/bin</bedtools>
+                <coverage-histogram>/opt/bio-scripts/get_cov_from_bedtools_hist.py</coverage-histogram>
+                <python>/usr/bin/python</python>
+                <php>/usr/bin/php</php>
+                <sqlldr></sqlldr>
+                <!-- FIXME: the following two scrpts are absent at ripcm:
+                <lscope-snp-filter>/data3/bio/biouser/snippets/filter_lifescope_SNPs.sh</lscope-snp-filter>
+                <lscope-2-promethease-converter>/data3/bio/biouser/snippets/convert_lifescope_SNPs_for_promethease.sh</lscope-2-promethease-converter> -->
+                <perl>/usr/bin/perl</perl>
+                <gff3-to-annovar>/opt/bio-soft/bin/convert2annovar.pl</gff3-to-annovar>
+                <!-- FIXME: here we probably have a licensing problem, see http://www.openbioinformatics.org/annovar/annovar_download_form.php
+                <annovar-annotate-variation>/data3/bio/biouser/tools/annovar/annotate_variation.pl</annovar-annotate-variation> -->
+                <!-- FIXME: the following two scrpts are absent at ripcm:
+                <gwas-analyser>/data3/bio/biouser/snippets/illnesses/illness.php</gwas-analyser>
+                <ancestry-analyser>/data3/bio/biouser/snippets/ancestry/ancestry.php</ancestry-analyser> -->
+                <solid-preprocess-filter-v2>/opt/bio-soft/bin/SOLiD_preprocess_filter_v2.pl</solid-preprocess-filter-v2>
+                <rapsearch>/opt/bio-soft/bin/rapsearch</rapsearch>
+                <varscan>/opt/bio-soft/bin/varscan</varscan>
+            </properties>
+        </profile>
     </profiles>
 
     <!-- Make application local repository for drmaa.jar, because for system scope there is no ability to add it to lib direcotory

@@ -8,7 +8,7 @@
         </layout>
     </appender>
     <!-- 
-        /dev/null - it's hack, because appliation don't now where it is
+        /dev/null - it's hack, because application don't know where it is
         and where to create log file.
      -->
     <appender name="file" class="org.apache.log4j.FileAppender">
@@ -19,9 +19,23 @@
         </layout>
     </appender>
 
+    <appender name="globalLog" class="org.apache.log4j.FileAppender">
+        <param name="File" value="${global.log.file}" />
+        <param name="Append" value="true" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{dd-MM-yyyy HH:mm:ss} - %m%n" />
+        </layout>
+    </appender>
+
+    <logger name="globalLogger">
+        <level value="info"/>
+        <appender-ref ref="globalLog"/>
+    </logger>
+
     <root>
         <priority value="${log.level}" />
         <appender-ref ref="console" />
         <appender-ref ref="file" />
     </root>
+
 </log4j:configuration>

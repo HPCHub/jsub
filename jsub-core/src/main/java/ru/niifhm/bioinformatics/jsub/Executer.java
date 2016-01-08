@@ -1,6 +1,7 @@
 package ru.niifhm.bioinformatics.jsub;
 
 
+import java.util.Arrays;
 import java.util.Date;
 import org.apache.log4j.Logger;
 import org.apache.tools.ant.BuildException;
@@ -38,8 +39,10 @@ abstract public class Executer {
      * лёгких задач выполняющихся в один поток.
      */
     //!!! обязательно убрать комментарий для рабочих кластеров - для jsub-test оставить "20"
-    public static final int MAXIMUM_CORE_NUMBER = 20;//Runtime.getRuntime().availableProcessors() - 4;
+    // FIXME: MAXIMUM_CORE_NUMBER должна быть конфигурационной переменной (зависящей от кластера)
+    public static final int MAXIMUM_CORE_NUMBER = 14; //Runtime.getRuntime().availableProcessors() - 4;
     private static Logger   _logger             = Logger.getLogger(Executer.class);
+
     /**
      * Ссылка на исполняемый проект.
      */
@@ -67,6 +70,15 @@ abstract public class Executer {
      * @return
      */
     public long registerRun() {
+
+        if (Config.globalLogger != null) {
+            Config.globalLogger.info(String.format(
+                    "** Task name: %s, Type: %s, Tag: %s, BuildDir: %s, Files: ",
+                            _pipeline.getName(), _pipeline.getType(), _pipeline.getTag(), _pipeline.getBuildDir()) +
+                            Arrays.toString(_pipeline.getInitialFiles().toArray())
+            );
+            return 0;
+        }
 
         JsubRun run = new JsubRun();
 
@@ -118,12 +130,12 @@ abstract public class Executer {
         /*
          * TODO: What about cluster configuration file ?
          */
-    	System.out.println("MAXIMUM_CORE_NUMBER  " + MAXIMUM_CORE_NUMBER);
-    	System.out.println("MINIMUM_CORE_NUMBER  " + MINIMUM_CORE_NUMBER);
-    	System.out.println("MAXIMUM_CORE_NUMBER = Runtime.getRuntime().availableProcessors() - 4 =  "+ Runtime.getRuntime().availableProcessors() + "- 4");
-    	_logger.error(String.format("MAXIMUM_CORE_NUMBER  ", MAXIMUM_CORE_NUMBER));
-    	_logger.error(String.format("MINIMUM_CORE_NUMBER  ", MINIMUM_CORE_NUMBER));
-    	_logger.error(String.format("MAXIMUM_CORE_NUMBER = Runtime.getRuntime().availableProcessors() - 4 =  ", Runtime.getRuntime().availableProcessors(), "- 4"));
+//    	System.out.println("MAXIMUM_CORE_NUMBER  " + MAXIMUM_CORE_NUMBER);
+//    	System.out.println("MINIMUM_CORE_NUMBER  " + MINIMUM_CORE_NUMBER);
+//    	System.out.println("MAXIMUM_CORE_NUMBER = Runtime.getRuntime().availableProcessors() - 4 =  "+ Runtime.getRuntime().availableProcessors() + "- 4");
+//    	_logger.error(String.format("MAXIMUM_CORE_NUMBER  ", MAXIMUM_CORE_NUMBER));
+//    	_logger.error(String.format("MINIMUM_CORE_NUMBER  ", MINIMUM_CORE_NUMBER));
+//    	_logger.error(String.format("MAXIMUM_CORE_NUMBER = Runtime.getRuntime().availableProcessors() - 4 =  ", Runtime.getRuntime().availableProcessors(), "- 4"));
     	if (tool == null) {
             return MINIMUM_CORE_NUMBER;
         }

@@ -32,6 +32,7 @@ public class Config extends HashMap<String, String> {
 
 
     public static final String     GRID_REPORTING_FILE        = "grid.reporting.file";
+    public static final String     GLOBAL_LOG_FILE            = "global.log.file";
     public static final String     JSUB_WEB_PROJECT_DIR       = "web.project.dir";
     public static final String     PROPERTY_PROJECT_DIR       = "dir";
     public static final String     PROPERTY_PROJECT_TYPE      = "type";
@@ -66,6 +67,11 @@ public class Config extends HashMap<String, String> {
      * Class logger.
      */
     private static Logger          _log                       = Logger.getLogger(Config.class);
+    /**
+     * Global logger (substitute for the data base)
+     */
+    public static Logger           globalLogger              = Logger.getLogger("globalLogger");
+
 
 
     /**
@@ -109,6 +115,12 @@ public class Config extends HashMap<String, String> {
                 "Cannot load application properties [%s]: %s", e.getClass().getName(), e.getMessage()
             ));
         }
+
+        // A bit hackish way to check whether global.log.file is set in pom.xml
+        if (get(GLOBAL_LOG_FILE).isEmpty() || get(GLOBAL_LOG_FILE).charAt(0) == '$') {
+            globalLogger = null;
+        }
+
     }
 
 
