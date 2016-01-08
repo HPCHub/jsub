@@ -80,12 +80,26 @@ public class ExecuteScenarioAction extends ActionSupport {
             .init();
 
             int count = provider.getCount();
-            _logger.info(String.format("Start to execute %s tasks under \"%s\" name", count, _name));
+            String description = String.format("Start to execute %s task(s) under \"%s\" name, tag: %s, " +
+                            "type: %s, startPhase: %s, targetList: %s, clearList: %s, properties: %s",
+                    count, _name, _tag, _type, _startPhase,
+                    Arrays.toString(_targetList.toArray()), Arrays.toString(_clearList.toArray()),
+                    Arrays.toString(_properties.entrySet().toArray()));
+            if (Config.globalLogger != null) {
+                Config.globalLogger.info(description);
+            } else {
+                _logger.info(description);
+            }
 
             String projectName;
             for (Object data : provider) {
 
-                _properties.putAll(provider.getProperties());
+                for (Map.Entry<String, String> e : provider.getProperties().entrySet()) {
+                    if (e.getKey() != null)
+                        _properties.put(e.getKey(), e.getValue());
+                    else
+                        throw new Exception("Unknown entry: " + e.getValue());
+                }
 
                 projectName = count == 1 ? _name : provider.getName();
                 _logger.info(String.format("Send \"%s\" project for execution", projectName));
@@ -111,7 +125,7 @@ public class ExecuteScenarioAction extends ActionSupport {
                     );
 
                     if (project.getBuildDir().exists() && ! _isForce) {
-                        throw new Exception("Project directory already exists.");
+                        throw new Exception("Project directory already exists:\n" + project.getBuildDir());
                     } else {
                         Command.factory(Command.COMMAND_CREATE).executeCommand();
                     }
@@ -140,15 +154,16 @@ public class ExecuteScenarioAction extends ActionSupport {
                  */
                 } catch (Exception e) {
                     _setError(String.format(
-                        "Cannot execute project \"%s\" [%s] %s",
-                        _name,
+                        "Cannot execute project \"%s\" [%s]:\n%s",
+                        projectName,
                         e.getClass().getName(),
-                        e.getMessage()
+                        e.getClass() == java.lang.NullPointerException.class ?
+                                Arrays.toString(e.getStackTrace()) : e.getMessage()
                     ));
                 } catch (Throwable t) {
                     _setError(String.format(
-                        "Cannot execute project \"%s\" [%s] %s",
-                        _name,
+                        "Cannot execute project \"%s\" [%s]:\n%s",
+                        projectName,
                         t.getClass().getName(),
                         t.getMessage()
                     ));
@@ -156,10 +171,11 @@ public class ExecuteScenarioAction extends ActionSupport {
             }
         } catch (Exception e) {
             _setError(String.format(
-                "Cannot execute run \"%s\" [%s] %s",
+                "Cannot execute run \"%s\" [%s]:\n%s\n(%s)",
                 _name,
                 e.getClass().getName(),
-            e.getMessage()));
+                e.getMessage(),
+                Arrays.toString(e.getStackTrace())));
         }
 
         return Action.SUCCESS;
