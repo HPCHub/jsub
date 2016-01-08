@@ -3,3 +3,4 @@
 *.war
 .settings/
 target/
+*~
